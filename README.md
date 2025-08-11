@@ -7,6 +7,7 @@
 - **Público alvo**: alunos da disciplina de SO (Sistemas Operacionais) do curso de TADS (Superior em Tecnologia em Análise e Desenvolvimento de Sistemas) no CNAT-IFRN (Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte - Campus Natal-Central).
 - disciplina: **SO** [Sistemas Operacionais](https://github.com/sistemas-operacionais/)
 - professor: [Leonardo A. Minora](https://github.com/leonardo-minora)
+- aluno: [Gabriel Henrique Furtado Barbosa] (https://github.com/gbrielf)
 - Repositótio do aluno: FIXME
 
 ## Tarefas do aluno
@@ -68,8 +69,44 @@ Os alunos devem simular a alocação dos processos na RAM usando o algoritmo **b
 
 ### 1. Alocação Inicial com Best-Fit
 
+| Processo | Tamanho (KB) |
+|----------|--------------|
+| P1       | 20           |
+| P2       | 15           |
+| P3       | 25           |
+| P4       | 10           |
+| P5       | 18           |
+
+**Passo a passo da alocação (Best-Fit):**
+1. **P1 (20KB)** → ocupa `[0 – 20]` (44 KB livres)
+2. **P2 (15KB)** → ocupa `[20 – 35]` (29 KB livres)
+3. **P3 (25KB)** → ocupa `[35 – 60]` (4 KB livres)
+4. **P4 (10KB)** → não cabe, vai para disco
+5. **P5 (18KB)** → não cabe, vai para disco
+
 ### 2. Simular Memória Virtual (Paginação)
 
-### 3. Desfragmentação da RAM
+| Processo | Tamanho (KB) | RAM (KB) | Disco |
+|----------|--------------|----------|-------|
+| P1       | 20           | 0–20     | -     |
+| P2       | 15           | 20–35    | -     |
+| P3       | 25           | 35–60    | -     |
+| P4       | 10           | -        | Total |
+| P5       | 18           | -        | Total |
+
+### 3. Desfragmentação da 
+
+**Antes da desfragmentação:** [0–20: P1] [20–35: P2] [35–60: P3] [60–64: Livre]
+**Depois da desfragmentação:** [0–60: P1, P2, P3] [60–64: Livre]
 
  ### 4. Questões para Reflexão
+
+
+**Best-fit foi mais eficiente que first-fit ou worst-fit neste cenário?**  
+Sim. O Best-Fit reduziu o desperdício interno, alocando os processos nos menores blocos possíveis, mas a limitação física da RAM impediu que todos os processos fossem alocados.
+
+**Como a memória virtual evitou um deadlock?**  
+A paginação para o disco permitiu a execução de processos que não cabiam na RAM, evitando bloqueios por falta de espaço.
+
+**Qual o impacto da desfragmentação no desempenho do sistema?**  
+A desfragmentação melhora a utilização da memória ao remover a fragmentação externa, mas exige movimentação de dados na RAM, o que consome tempo e recursos do processador.
